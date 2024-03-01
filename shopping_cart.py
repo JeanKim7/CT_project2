@@ -4,8 +4,9 @@ def shopping_cart():
     shopping_cart_list = []
     total=0
     
+    print("Welcome to Jean's Store!")
     while True:
-        user_input=input("Welcome to Jean's Store! Enter an option below to use your shopping cart!\n"
+        user_input=input("Enter an option below to use your shopping cart!\n"
               "Enter one of the following options (Add/Remove/Show/Clear/Quit): ").lower()
         
         #quit function
@@ -18,7 +19,7 @@ def shopping_cart():
             #check if item is in the shopping cart already
             check_list = []
             for a in shopping_cart_list:
-                check_list.append(a['item'])
+                check_list.append(a['item name'])
             #go back go start if item in shopping cart
             if item in check_list:
                 print("This item is already in your shopping cart. Please enter 'Add' to add more of this item!\n")
@@ -39,7 +40,7 @@ def shopping_cart():
                 print(f"\nHere is what you added:\n"
                       f"Item: {item}\n"
                       f"Quantity: {quantity}\n"
-                      f"Price: {price}\n"
+                      f"Price: ${price:.2f}\n"
                       f"Subtotal: ${subtotal:.2f}\n")
                 total+= subtotal
                 continue
@@ -53,7 +54,7 @@ def shopping_cart():
                       f"Quantity: {item['quantity']}\n"
                       f"Price: ${item['price']:.2f}\n"
                       f"Subtotal: ${item['subtotal']:.2f}\n")
-            print(f"Total: {total:.2f}")
+            print(f"Total: ${total:.2f}")
             remove_item = input("\nWhat item would you like to remove from your shopping cart? ")
             #check if item is in shopping cart
             check_list = []
@@ -66,8 +67,12 @@ def shopping_cart():
                 #remove all qunatities of item
                 if completely_gone == "yes":
                     for a in shopping_cart_list:
-                        if a['item name']==remove_item:
-                            shopping_cart_list.pop(a)
+                        if a['item name'] == remove_item:
+                            total-=a['subtotal']
+                            shopping_cart_list.remove(a)
+                            
+                    print(f"{remove_item.title()} has been removed from your shopping cart!\n")
+                    continue
                 #remove some quantity of item
                 elif completely_gone == "no":
                     remove_item_quantity = int(input("How many of your item would you like to remove? "))
@@ -76,7 +81,7 @@ def shopping_cart():
                             a['quantity'] -= remove_item_quantity
                             a['subtotal'] -= (remove_item_quantity*a['price'])
                             total -= (remove_item_quantity*a['price'])
-                            print("The items have been removed!")
+                            print("The items have been removed!\n")
                     continue
                 else:
                     print("Please enter yes or no.")
@@ -93,7 +98,7 @@ def shopping_cart():
                       f"Quantity: {item['quantity']}\n"
                       f"Price: ${item['price']:.2f}\n"
                       f"Subtotal: ${item['subtotal']:.2f}\n")
-            print(f"Total: {total:.2f}\n")
+            print(f"Total: ${total:.2f}\n")
             continue
         
         #clear shopping cart
@@ -103,14 +108,19 @@ def shopping_cart():
             if confirm_clear == 'yes':
                 shopping_cart_list = []
                 total = 0
+                print("Your shopping cart has been cleared!\n")
+                continue
             elif confirm_clear == 'no':
+                print("")
                 continue
             else: 
-                print("Please enter yes or no.")
+                print("Please enter yes or no.\n")
+                continue
 
         #print message if they enter wrong input
         else:
-            print("Please enter 'Add', 'Remove', 'Show', 'Clear' or 'Quit'!")
+            print("Please enter 'Add', 'Remove', 'Show', 'Clear' or 'Quit'!\n")
+            continue
 
 
 
