@@ -31,7 +31,7 @@ def shopping_cart():
                 check_list.append(a['item name'])
             #go back go start if item already in shopping cart
             if item in check_list:
-                print("This item is already in your shopping cart. Please enter 'Add' to add more of this item!\n")
+                print("---This item is already in your shopping cart. Please enter 'Add' to add more of this item!---\n")
                 continue
             #add new item if not in shopping cart already
             else:
@@ -39,14 +39,14 @@ def shopping_cart():
                 try:
                     quantity = int(input("How many of your item would you like to add? "))
                 except ValueError:
-                    print("Please enter a number only!\n")
+                    print("---Please enter a number only!---\n")
                     continue
                 else:
                     #exception for ValueError when inputting string for price
                     try:
                         price = float(input("What is the price of your item? "))
                     except ValueError:
-                        print("Please enter a number only!\n")
+                        print("---Please enter a number only!---\n")
                         continue
                     else:
                         #add item to shopping cart list
@@ -100,7 +100,7 @@ def shopping_cart():
                     try:
                         remove_item_quantity = int(input("How many of your item would you like to remove? "))
                     except ValueError:
-                        print("Please enter a number only!\n")
+                        print("---Please enter a number only!---\n")
                         continue
                     else:
                         for a in shopping_cart_list:
@@ -112,11 +112,11 @@ def shopping_cart():
                         continue
                 #go back to start if input isn't 'yes' or 'no'
                 else:
-                    print("Please enter yes or no!\n")
+                    print("---Please enter yes or no!---\n")
                     continue
             #go back to start if item not in shopping cart
             else:
-                print("That item is not in your shopping cart!\n")
+                print("---That item is not in your shopping cart!---\n")
                 continue
         
         #show current shopping cart
@@ -143,12 +143,12 @@ def shopping_cart():
                 print("")
                 continue
             else: 
-                print("Please enter yes or no.\n")
+                print("---Please enter yes or no!---\n")
                 continue
 
         #print message if they enter wrong input
         else:
-            print("Please enter 'Add', 'Remove', 'Show', 'Clear' or 'Quit'!\n")
+            print("---Please enter 'Add', 'Remove', 'Show', 'Clear' or 'Quit'!---\n")
             continue
 
 
