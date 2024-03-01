@@ -26,24 +26,34 @@ def shopping_cart():
                 continue
             #add new item if not in shopping cart already
             else:
-                quantity = int(input("How many of your item would you like to add? "))
-                price = float(input("What is the price of your item? "))
-                subtotal = (quantity*price)
-                item_dict = {
-                        'item name': item,
-                        'quantity':quantity,
-                        'price': price,
-                        'subtotal' : subtotal 
-                        }
-                shopping_cart_list.append(item_dict)
+                try:
+                    quantity = int(input("How many of your item would you like to add? "))
+                except ValueError:
+                    print("Please enter a number only!\n")
+                    continue
+                else:
+                    try:
+                        price = float(input("What is the price of your item? "))
+                    except ValueError:
+                        print("Please enter a number only!\n")
+                        continue
+                    else:
+                        subtotal = (quantity*price)
+                        item_dict = {
+                                'item name': item,
+                                'quantity':quantity,
+                                'price': price,
+                                'subtotal' : subtotal 
+                                }
+                        shopping_cart_list.append(item_dict)
 
-                print(f"\nHere is what you added:\n"
-                      f"Item: {item}\n"
-                      f"Quantity: {quantity}\n"
-                      f"Price: ${price:.2f}\n"
-                      f"Subtotal: ${subtotal:.2f}\n")
-                total+= subtotal
-                continue
+                        print(f"\nHere is what you added:\n"
+                            f"Item: {item}\n"
+                            f"Quantity: {quantity}\n"
+                            f"Price: ${price:.2f}\n"
+                            f"Subtotal: ${subtotal:.2f}\n")
+                        total+= subtotal
+                        continue
         
         #remove items from shopping cart
         elif user_input == "remove":
