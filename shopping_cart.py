@@ -85,7 +85,7 @@ def shopping_cart():
             #remove item if it is in the shopping cart
             if remove_item in check_list:
                 #give option to remove entire or some quantity of item
-                completely_gone = input("Would you like to remove the item completely from your cart? (Yes/No)").lower()
+                completely_gone = input("Would you like to remove the item completely from your cart? (Yes/No) ").lower()
                 #remove all qunatities of item
                 if completely_gone == "yes":
                     for a in shopping_cart_list:
