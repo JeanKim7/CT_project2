@@ -16,28 +16,31 @@ def shopping_cart():
         #add items to the shopping cart
         elif user_input == "add":
             item = input("\nWhat item would you like to add to your shopping cart? ")
-            #check if item is in the shopping cart already
+            #check if item is in the shopping cart 
             check_list = []
             for a in shopping_cart_list:
                 check_list.append(a['item name'])
-            #go back go start if item in shopping cart
+            #go back go start if item already in shopping cart
             if item in check_list:
                 print("This item is already in your shopping cart. Please enter 'Add' to add more of this item!\n")
                 continue
             #add new item if not in shopping cart already
             else:
+                #exception for ValueError when inputting string for quantity
                 try:
                     quantity = int(input("How many of your item would you like to add? "))
                 except ValueError:
                     print("Please enter a number only!\n")
                     continue
                 else:
+                    #exception for ValueError when inputting string for price
                     try:
                         price = float(input("What is the price of your item? "))
                     except ValueError:
                         print("Please enter a number only!\n")
                         continue
                     else:
+                        #add item to shopping cart list
                         subtotal = (quantity*price)
                         item_dict = {
                                 'item name': item,
@@ -46,7 +49,7 @@ def shopping_cart():
                                 'subtotal' : subtotal 
                                 }
                         shopping_cart_list.append(item_dict)
-
+                        #print items added to shopping cart
                         print(f"\nHere is what you added:\n"
                             f"Item: {item}\n"
                             f"Quantity: {quantity}\n"
@@ -79,25 +82,32 @@ def shopping_cart():
                     for a in shopping_cart_list:
                         if a['item name'] == remove_item:
                             total-=a['subtotal']
-                            shopping_cart_list.remove(a)
-                            
+                            shopping_cart_list.remove(a)        
                     print(f"{remove_item.title()} has been removed from your shopping cart!\n")
                     continue
                 #remove some quantity of item
                 elif completely_gone == "no":
-                    remove_item_quantity = int(input("How many of your item would you like to remove? "))
-                    for a in shopping_cart_list:
-                        if a['item name'] == remove_item:
-                            a['quantity'] -= remove_item_quantity
-                            a['subtotal'] -= (remove_item_quantity*a['price'])
-                            total -= (remove_item_quantity*a['price'])
-                            print("The items have been removed!\n")
-                    continue
+                    #exception for ValueError is string is entered for quantity
+                    try:
+                        remove_item_quantity = int(input("How many of your item would you like to remove? "))
+                    except ValueError:
+                        print("Please enter a number only!\n")
+                        continue
+                    else:
+                        for a in shopping_cart_list:
+                            if a['item name'] == remove_item:
+                                a['quantity'] -= remove_item_quantity
+                                a['subtotal'] -= (remove_item_quantity*a['price'])
+                                total -= (remove_item_quantity*a['price'])
+                                print("The items have been removed!\n")
+                        continue
+                #go back to start if input isn't 'yes' or 'no'
                 else:
-                    print("Please enter yes or no.")
+                    print("Please enter yes or no!\n")
+                    continue
             #go back to start if item not in shopping cart
             else:
-                print("That item is not in your shopping cart!")
+                print("That item is not in your shopping cart!\n")
                 continue
         
         #show current shopping cart
