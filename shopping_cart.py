@@ -11,6 +11,15 @@ def shopping_cart():
         
         #quit function
         if user_input == "quit":
+            #print receipt and goodbye message
+            print("\nHere is your receipt:\n")
+            for item in shopping_cart_list:
+                print(f"Item: {item['item name']}\n"
+                      f"Quantity: {item['quantity']}\n"
+                      f"Price: ${item['price']:.2f}\n"
+                      f"Subtotal: ${item['subtotal']:.2f}\n")
+            print(f"Total: ${total:.2f}\n")
+            print("Thank you for shopping at Jean's Store and we hope to see you again! Have a great day :)")
             break
         
         #add items to the shopping cart
